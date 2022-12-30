@@ -7,10 +7,14 @@ environment:
   sdk: '>=2.19.0-444.1.beta <3.0.0'
 
 dependencies:
+  camera: ^0.10.1
   flutter:
     sdk: flutter
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
+  image_cropper: ^3.0.1
+  image_picker: ^0.8.6
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:

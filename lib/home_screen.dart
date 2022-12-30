@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lingueye/pages/lessons_page.dart';
+import '../pages/lessons_page.dart';
 
 import 'styles/my_colors.dart';
 import 'pages/main_page.dart';
