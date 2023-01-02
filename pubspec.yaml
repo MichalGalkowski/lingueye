@@ -7,7 +7,6 @@ environment:
   sdk: '>=2.19.0-444.1.beta <3.0.0'
 
 dependencies:
-  camera: ^0.10.1
   flutter:
     sdk: flutter
   flutter_svg: ^1.1.6

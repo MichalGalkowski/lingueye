@@ -17,46 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  camera:
-    dependency: "direct main"
-    description:
-      name: camera
-      sha256: b7316e7861cf7a7196ef670f391a0e8d1f36eebd4e199d3077e0a23e11db2a44
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.1"
-  camera_android:
-    dependency: transitive
-    description:
-      name: camera_android
-      sha256: "24408d7078dd9b5e70bdb2ff35651c250b0efc9168df287e30fcb151e93ec515"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.2"
-  camera_avfoundation:
-    dependency: transitive
-    description:
-      name: camera_avfoundation
-      sha256: "4e1be6a29b5423136efe683c97f210dc6423011f8ad09c0e18b3e629eae8c896"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.10"
-  camera_platform_interface:
-    dependency: transitive
-    description:
-      name: camera_platform_interface
-      sha256: b13c4c7a1462f6b3453ac5df900fd42a8ab66477c2004bc16f8a7fdcf3e5fcd9
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.2"
-  camera_web:
-    dependency: transitive
-    description:
-      name: camera_web
-      sha256: "6db5052de8c5074edc8cf75bc9a63a56dd0ae18646152b9d2273a9a4f6301b17"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1"
   characters:
     dependency: transitive
     description:
@@ -424,14 +384,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -461,14 +413,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:

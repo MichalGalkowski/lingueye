@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lingueye/helpers/mlhelper.dart';
@@ -19,8 +20,20 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   XFile _img = XFile('');
-  String _imageText = '';
   String _translatedText = '';
+  bool showImage = false;
+  final _imageText = TextEditingController();
+
+  void _clearData() {
+    _img = XFile('');
+    _imageText.value = TextEditingValue.empty;
+    setState(() {});
+  }
+
+  Future _updateTranslation(String text) async {
+    _translatedText = await MLHelper().translateText(text);
+    setState(() {});
+  }
 
   Future _pickImage() async {
     try {
@@ -33,7 +46,8 @@ class _MainPageState extends State<MainPage> {
 
       setState(() {
         _img = img;
-        _imageText = txt.isEmpty ? 'Nie wykryto tekstu' : txt;
+        _imageText.value =
+            TextEditingValue(text: txt.isEmpty ? 'Nie wykryto tekstu' : txt);
         _translatedText =
             translatedTxt.isEmpty ? 'Brak tłumaczenia' : translatedTxt;
       });
@@ -60,7 +74,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     bool isImage = _img.path.isNotEmpty;
-    bool isText = _imageText.isNotEmpty;
+    bool isText = _imageText.value.text.isNotEmpty;
 
     return Container(
       color: const Color(MyColors.background),
@@ -68,46 +82,108 @@ class _MainPageState extends State<MainPage> {
         child: Center(
             child: Column(
           children: [
-            Container(
-              height: 48.0,
-              padding: const EdgeInsets.all(12.0),
-              alignment: AlignmentDirectional.centerEnd,
-              child: isImage
-                  ? ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _img = XFile('');
-                          _imageText = '';
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: MyColors.mainMaterial[400]),
-                      child: Text(
-                        'Wyczyść',
-                        style: MyStyles.textButtonDark,
-                      ))
-                  : const SizedBox(),
-            ),
-            Expanded(
-              flex: 1,
-              child: isImage
-                  ? Image.file(File(_img.path))
-                  : InkWell(
-                      onTap: () => _pickImage(),
-                      child: SvgPicture.asset(
-                        'assets/logo.svg',
-                        color: MyColors.mainMaterial,
-                        width: MediaQuery.of(context).size.width * .6,
-                      ),
+            isImage
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        InkWell(
+                          onTap: () => _pickImage(),
+                          child: SvgPicture.asset(
+                            'assets/logo.svg',
+                            color: MyColors.mainMaterial,
+                            width: 80,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        FittedBox(
+                          child: Text(
+                            'LinguEye',
+                            style: GoogleFonts.kodchasan(
+                                color: MyColors.mainMaterial,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 32.0),
+                          ),
+                        ),
+                        const Expanded(
+                          child: SizedBox(),
+                        ),
+                        ElevatedButton(
+                            onPressed: () => _clearData(),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: MyColors.mainMaterial[400]),
+                            child: Text(
+                              'Wyczyść',
+                              style: MyStyles.textButtonDark,
+                            )),
+                      ],
                     ),
-            ),
-            TextButton(
-                onPressed: () => _pickImage(),
-                child: Text(
-                  'Zrób zdjęcie tekstu do przetłumaczenia',
-                  textAlign: TextAlign.center,
-                  style: MyStyles.textHeader,
-                )),
+                  )
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height * .7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: InkWell(
+                            onTap: () => _pickImage(),
+                            child: SvgPicture.asset(
+                              'assets/logo.svg',
+                              color: MyColors.mainMaterial,
+                              width: isImage
+                                  ? 80
+                                  : MediaQuery.of(context).size.width * .6,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'LinguEye',
+                          style: GoogleFonts.kodchasan(
+                              color: MyColors.mainMaterial,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 48.0),
+                        ),
+                        TextButton(
+                            onPressed: () => _pickImage(),
+                            child: Text(
+                              'Zrób zdjęcie tekstu do przetłumaczenia',
+                              textAlign: TextAlign.center,
+                              style: MyStyles.textHeader,
+                            )),
+                      ],
+                    ),
+                  ),
+            isImage
+                ? SizedBox(
+                    child: Column(children: [
+                      InkWell(
+                        onTap: () => setState(
+                            () => showImage = showImage ? false : true),
+                        child: Text(
+                          showImage ? 'Ukryj zdjęcie' : 'Pokaż zdjęcie',
+                          style: GoogleFonts.kodchasan(
+                              color: MyColors.mainMaterial[200],
+                              fontWeight: FontWeight.w100,
+                              fontSize: 16.0),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      showImage
+                          ? Image.file(
+                              File(_img.path),
+                              height: 200,
+                            )
+                          : const SizedBox(),
+                    ]),
+                  )
+                : const SizedBox(),
             Expanded(
                 flex: 1, child: isText ? _buildTextCard() : const SizedBox()),
           ],
@@ -121,17 +197,28 @@ class _MainPageState extends State<MainPage> {
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
+            Flexible(
               child: Card(
                 color: MyColors.mainMaterial[800],
                 child: SingleChildScrollView(
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        _imageText,
+                      child: TextFormField(
+                        onChanged: (value) {
+                          if (value.isEmpty) {
+                            return;
+                          } else {
+                            _updateTranslation(value);
+                          }
+                        },
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.multiline,
+                        minLines: 1,
+                        maxLines: 100,
+                        controller: _imageText,
                         style: TextStyle(color: MyColors.mainMaterial[100]),
                       ),
                     ),
@@ -139,7 +226,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
-            Expanded(
+            Flexible(
               child: Card(
                 color: MyColors.mainMaterial[800],
                 child: SingleChildScrollView(
