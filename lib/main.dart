@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'home_screen.dart';
+import 'providers/data_provider.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,8 +13,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: DataProvider()),
+      ],
+      child: const MaterialApp(
+        home: HomeScreen(),
+      ),
     );
   }
 }
