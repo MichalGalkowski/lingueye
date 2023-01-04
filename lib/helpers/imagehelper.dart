@@ -17,7 +17,8 @@ class ImageHelper {
 
       dataProvider.changeImage(img);
       dataProvider.changeEditText(txt.isEmpty ? 'Nie wykryto tekstu' : txt);
-      dataProvider.changeTranslatedText(txt.isEmpty ? 'Brak tłumaczenia' : txt);
+      dataProvider.changeTranslatedText(
+          txt.isEmpty ? 'Brak tłumaczenia' : txt, recognizedLanguage);
       dataProvider.changeLanguage(recognizedLanguage);
     } on PlatformException catch (e) {
       throw Exception(e);

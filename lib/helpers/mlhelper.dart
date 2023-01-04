@@ -1,6 +1,7 @@
 import 'package:google_mlkit_language_id/google_mlkit_language_id.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MLHelper {
   Future<String> textFromImage(String path) async {
@@ -146,7 +147,28 @@ class MLHelper {
         sourceLanguage = TranslateLanguage.polish;
         break;
     }
-    const TranslateLanguage targetLanguage = TranslateLanguage.polish;
+    TranslateLanguage targetLanguage;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String code = prefs.getString('code') ?? 'pl';
+    switch (code) {
+      case 'pl':
+        targetLanguage = TranslateLanguage.polish;
+        break;
+      case 'en':
+        targetLanguage = TranslateLanguage.english;
+        break;
+      case 'de':
+        targetLanguage = TranslateLanguage.german;
+        break;
+      case 'es':
+        targetLanguage = TranslateLanguage.spanish;
+        break;
+      case 'uk':
+        targetLanguage = TranslateLanguage.ukrainian;
+        break;
+      default:
+        targetLanguage = TranslateLanguage.polish;
+    }
 
     final onDeviceTranslator = OnDeviceTranslator(
         sourceLanguage: sourceLanguage, targetLanguage: targetLanguage);
