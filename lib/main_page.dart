@@ -44,10 +44,13 @@ class MainPage extends StatelessWidget {
                     onPressed: () => ImageHelper().pickImage(dataProvider),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: MyColors.mainMaterial[800]),
-                    child: Text(
-                      'Zrób zdjęcie tekstu do przetłumaczenia',
-                      textAlign: TextAlign.center,
-                      style: MyStyles.textButtonLight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'Zrób zdjęcie tekstu do przetłumaczenia',
+                        textAlign: TextAlign.center,
+                        style: MyStyles.textButtonLight,
+                      ),
                     )),
               ],
             ),

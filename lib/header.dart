@@ -23,26 +23,22 @@ class Header extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(
-            width: 12,
-          ),
-          SvgPicture.asset(
-            'assets/logo.svg',
-            color: MyColors.mainMaterial,
-            width: 80,
-          ),
-          const SizedBox(
-            width: 12,
+          Flexible(
+            fit: FlexFit.loose,
+            child: SvgPicture.asset(
+              'assets/logo.svg',
+              color: MyColors.mainMaterial,
+              width: 80,
+            ),
           ),
           FittedBox(
+            fit: BoxFit.scaleDown,
             child: Text(
               'LinguEye',
               style: MyStyles.headerText,
             ),
-          ),
-          const Expanded(
-            child: SizedBox(),
           ),
           ElevatedButton(
               onPressed: () => clearData(),

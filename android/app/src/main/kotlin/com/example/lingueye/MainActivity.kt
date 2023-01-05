@@ -1,4 +1,4 @@
-package com.example.lingueye
+package pl.mgalkowski.lingueye
 
 import io.flutter.embedding.android.FlutterActivity
 

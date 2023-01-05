@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lingueye/styles/my_styles.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/data_provider.dart';
@@ -37,6 +38,10 @@ class _EditTextState extends State<EditText> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              style: MyStyles.text,
+              decoration: const InputDecoration(
+                focusedBorder: InputBorder.none,
+              ),
               onChanged: (value) {
                 dataProvider.changeEditText(value);
                 dataProvider.changeTranslatedText(
@@ -47,7 +52,6 @@ class _EditTextState extends State<EditText> {
               minLines: 1,
               maxLines: 100,
               controller: _imageText,
-              style: TextStyle(color: MyColors.mainMaterial[100]),
             ),
           ),
         ),

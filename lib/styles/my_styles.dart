@@ -24,4 +24,9 @@ class MyStyles {
       color: MyColors.mainMaterial,
       fontWeight: FontWeight.w300,
       fontSize: 48.0);
+  static TextStyle text = GoogleFonts.openSans(
+    color: MyColors.mainMaterial[100],
+    fontWeight: FontWeight.w300,
+    fontSize: 16,
+  );
 }

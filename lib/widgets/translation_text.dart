@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lingueye/styles/my_styles.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/data_provider.dart';
@@ -16,10 +17,10 @@ class TranslationText extends StatelessWidget {
       child: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
+            padding: const EdgeInsets.all(18.0),
+            child: SelectableText(
               translatedText,
-              style: TextStyle(color: MyColors.mainMaterial[100]),
+              style: MyStyles.text,
             ),
           ),
         ),

@@ -19,6 +19,7 @@ class PickLanguage extends StatelessWidget {
             child: Text('Przetłumacz na:', style: MyStyles.smallLightText),
           ),
           Container(
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               color: MyColors.mainMaterial.withOpacity(.2),
               borderRadius: BorderRadius.circular(40),
